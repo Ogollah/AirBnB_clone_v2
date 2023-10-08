@@ -10,6 +10,26 @@ env.user = 'ubuntu'
 env.key_filename = '~/.ssh/id_rsa'
 
 
+def do_pack():
+    """Function to compress content
+
+    Return: Archive path
+    """
+    # Time
+    now = datetime.now()
+    now = now.strftime('%Y%m%d%H%M%S')
+    archive_path = 'versions/web_static_' + now + '.tgz'
+
+    # Archives
+    local('mkdir -p versions/')
+    result = local('tar -cvzf {} web_static/'.format(archive_path))
+
+    # Check archiving
+    if result.succeeded:
+        return archive_path
+    return None
+
+
 def do_deploy(archive_path):
     if not path.exists(archive_path):
         return False
