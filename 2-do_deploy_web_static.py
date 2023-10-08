@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # Compress packages
 
-from fabric.api import *
+from fabric.api import local, cd, put, run, env
 from os import path
 from datetime import datetime
 
